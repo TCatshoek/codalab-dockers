@@ -1,5 +1,17 @@
 FROM tensorflow/tensorflow:latest-gpu
 
+RUN apt-get update && apt-get install -y \
+        wget \
+        && rm -rf /var/lib/apt/lists/*
+
+RUN cd /opt \
+        && wget https://packages.gurobi.com/9.5/gurobi9.5.2_linux64.tar.gz \
+        && tar zxvf gurobi9.5.2_linux64.tar.gz \
+        && rm gurobi9.5.2_linux64.tar.gz
+
+ENV PATH="${PATH}":/opt/gurobi952/linux64/bin
+ENV GUROBI_HOME=/opt/gurobi952/linux64
+
 RUN pip install --upgrade pip
 RUN pip install \
         theano==1.0.5 \
@@ -18,7 +30,8 @@ RUN pip install \
         psutil==5.9.1 \
         h5py==3.6.0 \
         jupyter==1.0.0 \
-	gym==0.25.1
+	gym==0.25.1 \ 
+        gurobipy==9.5.2
 
 WORKDIR /app/codalab
 
