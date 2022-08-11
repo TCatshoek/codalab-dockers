@@ -33,6 +33,13 @@ RUN pip install \
 	gym==0.25.1 \ 
         gurobipy==9.5.2
 
+ENV PYG_VERSION=1.12.0+cu102
+RUN pip install torch-scatter -f https://data.pyg.org/whl/torch-${PYG_VERSION}.html \
+        && pip install torch-sparse -f https://data.pyg.org/whl/torch-${PYG_VERSION}.html \
+        && pip install torch-geometric \
+        && pip install torch-cluster -f https://data.pyg.org/whl/torch-${PYG_VERSION}.html \ 
+        && pip install torch-spline-conv -f https://data.pyg.org/whl/torch-${PYG_VERSION}.html \
+
 WORKDIR /app/codalab
 
 # To add
