@@ -2,6 +2,8 @@ FROM tensorflow/tensorflow:latest-gpu
 
 RUN apt-get update && apt-get install -y \
         wget \
+        build-essential \
+        cmake \
         && rm -rf /var/lib/apt/lists/*
 
 RUN cd /opt \
